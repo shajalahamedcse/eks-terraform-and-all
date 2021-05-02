@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wildcard-host
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+spec:
+  rules:
+  - host: "frontend.seminar.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 80
+  - host: "api.seminar.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: svc1
+            port:
+              number: 80
+  - host: "api.sum.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: react-back
+            port:
+              number: 80
+  - host: "front.sum.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: react-front
+            port:
+              number: 80
